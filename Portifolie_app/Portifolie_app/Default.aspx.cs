@@ -16,7 +16,8 @@ namespace Portifolie_app
         private portifoliedbEntities db = new portifoliedbEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            portRepeater.DataSource = db.tbluser.ToList();
+            portRepeater.DataBind();
         }
     }
 }
