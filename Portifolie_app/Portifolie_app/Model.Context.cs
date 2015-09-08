@@ -15,8 +15,7 @@ namespace Portifolie_app
     
     public partial class portifoliedbEntities : DbContext
     {
-        public portifoliedbEntities()
-            : base("name=portifoliedbEntities")
+        public portifoliedbEntities(): base("name=portifoliedbEntities")
         {
         }
     

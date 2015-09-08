@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MySql.Data.MySqlClient;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Web.Configuration;
@@ -16,13 +15,11 @@ namespace Portifolie_app
     {
         private portifoliedbEntities db = new portifoliedbEntities();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
+            //List<tbluser> listUsers = db.tbluser.ToList();
             
-            //string connection = WebConfigurationManager.ConnectionStrings["portifoliedbEntities"].ConnectionString;
-            //MySqlConnection conn = new MySqlConnection(connection);
-            //MySqlCommand com = new 
+            txtUserName.Text = db.tbluser.Find(1).userName;
         }
 
         protected void btnForgot_Click(object sender, EventArgs e)
@@ -39,11 +36,5 @@ namespace Portifolie_app
         {
             lblStatus.Text = "You get in!";
         }
-
-        //public class portifoliedbEntities : DbContext
-        //{
-        //    public DbSet<string> UserName { get; set; }
-        //}
-
     }
 }
