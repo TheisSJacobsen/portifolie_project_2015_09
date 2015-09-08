@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="759e6d5eb9b94683a3bd4bd4782792eb" Name="Diagram1">
+      <Diagram DiagramId="524a6a38a6574d90a1b9f3b8db8a1a19" Name="Diagram1">
         <EntityTypeShape EntityType="portifoliedbModel.tbleducation" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="portifoliedbModel.tblportfolio" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="portifoliedbModel.tbluser" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
