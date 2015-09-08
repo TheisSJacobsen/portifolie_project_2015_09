@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="portifoliedbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="portifoliedbModelStoreContainer">
+          <EntitySet Name="tbleducation" EntityType="portifoliedbModel.Store.tbleducation" store:Type="Tables" Schema="portifoliedb" />
+          <EntitySet Name="tblportfolio" EntityType="portifoliedbModel.Store.tblportfolio" store:Type="Tables" Schema="portifoliedb" />
+          <EntitySet Name="tbluser" EntityType="portifoliedbModel.Store.tbluser" store:Type="Tables" Schema="portifoliedb" />
+          <EntitySet Name="tblwork" EntityType="portifoliedbModel.Store.tblwork" store:Type="Tables" Schema="portifoliedb" />
+          <AssociationSet Name="tbleducation_ibfk_1" Association="portifoliedbModel.Store.tbleducation_ibfk_1">
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+            <End Role="tbleducation" EntitySet="tbleducation" />
+          </AssociationSet>
+          <AssociationSet Name="tblportfolio_ibfk_1" Association="portifoliedbModel.Store.tblportfolio_ibfk_1">
+            <End Role="tbluser" EntitySet="tbluser" />
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+          </AssociationSet>
+          <AssociationSet Name="tblwork_ibfk_1" Association="portifoliedbModel.Store.tblwork_ibfk_1">
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+            <End Role="tblwork" EntitySet="tblwork" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbleducation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="eduStart" Type="datetime" />
+          <Property Name="eduFinish" Type="datetime" />
+          <Property Name="eduName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="eduSchool" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="portID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblportfolio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="portDescription" Type="text" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="userPassword" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="userDescription" Type="text" />
+          <Property Name="userPicture" Type="text" />
+        </EntityType>
+        <EntityType Name="tblwork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="workStart" Type="datetime" />
+          <Property Name="workFinish" Type="datetime" />
+          <Property Name="workName" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="workTitle" Type="varchar" MaxLength="50" />
+          <Property Name="workReferenceName" Type="varchar" MaxLength="250" />
+          <Property Name="workReferenceNumber" Type="varchar" MaxLength="15" />
+          <Property Name="portID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="tbleducation_ibfk_1">
+          <End Role="tblportfolio" Type="portifoliedbModel.Store.tblportfolio" Multiplicity="1" />
+          <End Role="tbleducation" Type="portifoliedbModel.Store.tbleducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbleducation">
+              <PropertyRef Name="portID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblportfolio_ibfk_1">
+          <End Role="tbluser" Type="portifoliedbModel.Store.tbluser" Multiplicity="1" />
+          <End Role="tblportfolio" Type="portifoliedbModel.Store.tblportfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbluser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblportfolio">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblwork_ibfk_1">
+          <End Role="tblportfolio" Type="portifoliedbModel.Store.tblportfolio" Multiplicity="1" />
+          <End Role="tblwork" Type="portifoliedbModel.Store.tblwork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblwork">
+              <PropertyRef Name="portID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="portifoliedbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="portifoliedbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="tbleducation" EntityType="portifoliedbModel.tbleducation" />
+          <EntitySet Name="tblportfolio" EntityType="portifoliedbModel.tblportfolio" />
+          <EntitySet Name="tbluser" EntityType="portifoliedbModel.tbluser" />
+          <EntitySet Name="tblwork" EntityType="portifoliedbModel.tblwork" />
+          <AssociationSet Name="tbleducation_ibfk_1" Association="portifoliedbModel.tbleducation_ibfk_1">
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+            <End Role="tbleducation" EntitySet="tbleducation" />
+          </AssociationSet>
+          <AssociationSet Name="tblportfolio_ibfk_1" Association="portifoliedbModel.tblportfolio_ibfk_1">
+            <End Role="tbluser" EntitySet="tbluser" />
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+          </AssociationSet>
+          <AssociationSet Name="tblwork_ibfk_1" Association="portifoliedbModel.tblwork_ibfk_1">
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+            <End Role="tblwork" EntitySet="tblwork" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbleducation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="eduStart" Type="DateTime" />
+          <Property Name="eduFinish" Type="DateTime" />
+          <Property Name="eduName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="eduSchool" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="portID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblportfolio" Relationship="portifoliedbModel.tbleducation_ibfk_1" FromRole="tbleducation" ToRole="tblportfolio" />
+        </EntityType>
+        <EntityType Name="tblportfolio">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="portDescription" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbleducation" Relationship="portifoliedbModel.tbleducation_ibfk_1" FromRole="tblportfolio" ToRole="tbleducation" />
+          <NavigationProperty Name="tbluser" Relationship="portifoliedbModel.tblportfolio_ibfk_1" FromRole="tblportfolio" ToRole="tbluser" />
+          <NavigationProperty Name="tblwork" Relationship="portifoliedbModel.tblwork_ibfk_1" FromRole="tblportfolio" ToRole="tblwork" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="userDescription" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <Property Name="userPicture" Type="String" MaxLength="65535" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="tblportfolio" Relationship="portifoliedbModel.tblportfolio_ibfk_1" FromRole="tbluser" ToRole="tblportfolio" />
+        </EntityType>
+        <EntityType Name="tblwork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="workStart" Type="DateTime" />
+          <Property Name="workFinish" Type="DateTime" />
+          <Property Name="workName" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="workTitle" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="workReferenceName" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="workReferenceNumber" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="portID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblportfolio" Relationship="portifoliedbModel.tblwork_ibfk_1" FromRole="tblwork" ToRole="tblportfolio" />
+        </EntityType>
+        <Association Name="tbleducation_ibfk_1">
+          <End Role="tblportfolio" Type="portifoliedbModel.tblportfolio" Multiplicity="1" />
+          <End Role="tbleducation" Type="portifoliedbModel.tbleducation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbleducation">
+              <PropertyRef Name="portID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblportfolio_ibfk_1">
+          <End Role="tbluser" Type="portifoliedbModel.tbluser" Multiplicity="1" />
+          <End Role="tblportfolio" Type="portifoliedbModel.tblportfolio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbluser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblportfolio">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblwork_ibfk_1">
+          <End Role="tblportfolio" Type="portifoliedbModel.tblportfolio" Multiplicity="1" />
+          <End Role="tblwork" Type="portifoliedbModel.tblwork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblwork">
+              <PropertyRef Name="portID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="portifoliedbModelStoreContainer" CdmEntityContainer="portifoliedbEntities">
+          <EntitySetMapping Name="tbleducation">
+            <EntityTypeMapping TypeName="portifoliedbModel.tbleducation">
+              <MappingFragment StoreEntitySet="tbleducation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="eduStart" ColumnName="eduStart" />
+                <ScalarProperty Name="eduFinish" ColumnName="eduFinish" />
+                <ScalarProperty Name="eduName" ColumnName="eduName" />
+                <ScalarProperty Name="eduSchool" ColumnName="eduSchool" />
+                <ScalarProperty Name="portID" ColumnName="portID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblportfolio">
+            <EntityTypeMapping TypeName="portifoliedbModel.tblportfolio">
+              <MappingFragment StoreEntitySet="tblportfolio">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="portDescription" ColumnName="portDescription" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbluser">
+            <EntityTypeMapping TypeName="portifoliedbModel.tbluser">
+              <MappingFragment StoreEntitySet="tbluser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userDescription" ColumnName="userDescription" />
+                <ScalarProperty Name="userPicture" ColumnName="userPicture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblwork">
+            <EntityTypeMapping TypeName="portifoliedbModel.tblwork">
+              <MappingFragment StoreEntitySet="tblwork">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="workStart" ColumnName="workStart" />
+                <ScalarProperty Name="workFinish" ColumnName="workFinish" />
+                <ScalarProperty Name="workName" ColumnName="workName" />
+                <ScalarProperty Name="workTitle" ColumnName="workTitle" />
+                <ScalarProperty Name="workReferenceName" ColumnName="workReferenceName" />
+                <ScalarProperty Name="workReferenceNumber" ColumnName="workReferenceNumber" />
+                <ScalarProperty Name="portID" ColumnName="portID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

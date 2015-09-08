@@ -1,0 +1,76 @@
+create table tblUser
+
+(
+
+ID int auto_increment not null primary key,
+
+userName varchar(250) not null,
+
+userPassword varchar(50) not null,
+
+userDescription text(21844),
+
+userPicture text(21844)
+
+);
+
+create table tblPortfolio
+
+(
+
+ID int auto_increment not null primary key,
+
+portDescription text(21844),
+
+userID int not null,
+
+
+foreign key(userID) references tblUser(ID)
+
+);
+
+create table tblWork
+
+(
+
+ID int auto_increment not null primary key,
+
+workStart datetime,
+
+workFinish datetime,
+
+workName varchar(300) not null,
+
+workTitle varchar(50),
+
+workReferenceName varchar(250),
+
+workReferenceNumber varchar(15),
+
+portID int not null,
+
+
+foreign key(portID) references tblPortfolio(ID)
+
+);
+
+create table tblEducation
+
+(
+
+ID int auto_increment not null primary key,
+
+eduStart datetime,
+
+eduFinish datetime,
+
+eduName varchar(50) not null,
+
+eduSchool varchar(50) not null,
+
+portID int not null,
+
+
+foreign key(portID) references tblPortfolio(ID)
+
+);
