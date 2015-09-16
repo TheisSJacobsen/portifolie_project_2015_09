@@ -17,9 +17,6 @@ namespace Portifolie_app
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //List<tbluser> listUsers = db.tbluser.ToList();
-            
-            txtUserName.Text = db.tbluser.Find(1).userName;
         }
 
         protected void btnForgot_Click(object sender, EventArgs e)
