@@ -1,0 +1,6 @@
+INSERT INTO tbluser (`ID`, `userName`, `userPassword`, `userFullName`, `userDescription`, `userPicture`, `userAddress`)
+VALUES
+(1, "VicHan", "123456", "Victor Hansen", "Noget tekst her om hvor sej han er", "Et billede af ham", "Odinsgade 14, 9000, Aalborg, Danmark");
+INSERT INTO tbluser (`ID`, `userName`, `userPassword`, `userFullName`, `userDescription`, `userPicture`, `userAddress`)
+VALUES
+(2, "BjorgeMann", "123456", "Bjorge Rimmersen", "Noget tekst her om hvor awesome han er", "Et billede af ham smile", "Hadsundvej 70, 9000, Aalborg, Danmark");

@@ -13,7 +13,6 @@ userDescription text(21844),
 
 userPicture text(21844)
 
-userAddress varchar(1000)
 );
 
 create table tblPortfolio
@@ -49,7 +48,6 @@ workReferenceName varchar(250),
 
 workReferenceNumber varchar(15),
 
-workAddress varchar(1000),
 portID int not null,
 
 
@@ -71,7 +69,6 @@ eduName varchar(50) not null,
 
 eduSchool varchar(50) not null,
 
-eduAddress varchar(1000),
 portID int not null,
 
 
