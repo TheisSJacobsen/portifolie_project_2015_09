@@ -24,8 +24,8 @@
     @foreach (var user in Model)
     {
     <li>
-        <a href="">
-            <img src="@user.userPicture" alt="Alternate Text" />Portfolio of @user.userName
+        <a href="/Home/Portfolie?id=@user.ID">
+            <img src="@user.userPicture" alt="Alternate Text" />Portfolio of @user.userFullName
         </a>
     </li>
     }

@@ -14,19 +14,14 @@ namespace PortfolioMVC
     
     public partial class tbluser
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbluser()
-        {
-            this.tblportfolios = new HashSet<tblportfolio>();
-        }
-    
         public int ID { get; set; }
         public string userName { get; set; }
         public string userPassword { get; set; }
         public string userDescription { get; set; }
         public string userPicture { get; set; }
+        public string userFullName { get; set; }
+        public string userAddress { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblportfolio> tblportfolios { get; set; }
+        public virtual tblportfolio tblportfolio { get; set; }
     }
 }

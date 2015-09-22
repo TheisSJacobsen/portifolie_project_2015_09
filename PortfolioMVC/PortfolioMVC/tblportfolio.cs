@@ -23,12 +23,11 @@ namespace PortfolioMVC
     
         public int ID { get; set; }
         public string portDescription { get; set; }
-        public int userID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbleducation> tbleducations { get; set; }
-        public virtual tbluser tbluser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblwork> tblworks { get; set; }
+        public virtual tbluser tbluser { get; set; }
     }
 }
