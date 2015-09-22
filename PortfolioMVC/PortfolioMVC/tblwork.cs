@@ -22,6 +22,7 @@ namespace PortfolioMVC
         public string workReferenceName { get; set; }
         public string workReferenceNumber { get; set; }
         public int portID { get; set; }
+        public string workAddress { get; set; }
     
         public virtual tblportfolio tblportfolio { get; set; }
     }

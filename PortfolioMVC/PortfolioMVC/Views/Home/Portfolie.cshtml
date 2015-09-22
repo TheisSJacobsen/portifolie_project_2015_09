@@ -1,0 +1,42 @@
+﻿@model PortfolioMVC.tbluser
+@{
+    ViewBag.Title = "Portfolie";
+}
+
+<h2>@Model.userFullName's Portfolie</h2>
+<div class="userInfo">
+    <img src="@Model.userPicture" alt="Img Not found" />
+    <p id="fullName">Fulde navn: @Model.userFullName</p>
+    <p id="freetext">@Model.userDescription</p>
+</div>
+@if (Model.tblportfolio!= null) { 
+<div class="uddannelser">
+    <ul>
+        @foreach (var edu in Model.tblportfolio.tbleducations) { 
+        <li>
+            <h2 class="subject">Linje: @edu.eduName</h2>
+            <p class="dato">Påstartet: @edu.eduStart</p>
+            <p class="dato">Afsluttet: @edu.eduFinish</p>
+            <p class="schoolName">Skolenavn: @edu.eduSchool</p>
+            <div class="edu map" data-location="@edu.eduAddress"></div>
+        </li>
+        }
+    </ul>
+</div>
+<div class="jobs">
+    <ul>
+        @foreach (var job in Model.tblportfolio.tblworks) { 
+        <li>
+            <h2>@job.workName</h2>
+            <p class="dato">Påstartet: @job.workStart</p>
+            <p class="dato">Afsluttet: @job.workFinish</p>
+            <p class="jobTitle">Title: @job.workTitle</p>
+            <p class="referance">Refferance: @job.workReferenceName tlf:@job.workReferenceNumber</p>
+            <div class="work map" data-location="@job.workAddress"></div>
+        </li>
+        }
+    </ul>
+</div>
+<p id="portfolieDescription">Beskrivelse: @Model.tblportfolio.portDescription</p>
+}
+<div class="user map" data-location="@Model.userAddress"></div>

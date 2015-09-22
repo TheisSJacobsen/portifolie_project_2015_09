@@ -20,6 +20,7 @@ namespace PortfolioMVC
         public string eduName { get; set; }
         public string eduSchool { get; set; }
         public int portID { get; set; }
+        public string eduAddress { get; set; }
     
         public virtual tblportfolio tblportfolio { get; set; }
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="portifolieDbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="portifolieDbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbleducation">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,6 +14,7 @@
           <Property Name="eduFinish" Type="datetime" Precision="0" />
           <Property Name="eduName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="eduSchool" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="eduAddress" Type="varchar" MaxLength="1000" />
           <Property Name="portID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblportfolio">
@@ -22,17 +23,18 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="portDescription" Type="text" />
-          <Property Name="userID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbluser">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="userPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userFullName" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="userDescription" Type="text" />
           <Property Name="userPicture" Type="text" />
+          <Property Name="userAddress" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="tblwork">
           <Key>
@@ -45,8 +47,21 @@
           <Property Name="workTitle" Type="varchar" MaxLength="50" />
           <Property Name="workReferenceName" Type="varchar" MaxLength="250" />
           <Property Name="workReferenceNumber" Type="varchar" MaxLength="15" />
+          <Property Name="workAddress" Type="varchar" MaxLength="1000" />
           <Property Name="portID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="ID">
+          <End Role="tbluser" Type="Self.tbluser" Multiplicity="1" />
+          <End Role="tblportfolio" Type="Self.tblportfolio" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbluser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tbleducation_ibfk_1">
           <End Role="tblportfolio" Type="Self.tblportfolio" Multiplicity="1" />
           <End Role="tbleducation" Type="Self.tbleducation" Multiplicity="*" />
@@ -56,18 +71,6 @@
             </Principal>
             <Dependent Role="tbleducation">
               <PropertyRef Name="portID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="tblportfolio_ibfk_1">
-          <End Role="tbluser" Type="Self.tbluser" Multiplicity="1" />
-          <End Role="tblportfolio" Type="Self.tblportfolio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbluser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblportfolio">
-              <PropertyRef Name="userID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -88,21 +91,20 @@
           <EntitySet Name="tblportfolio" EntityType="Self.tblportfolio" Schema="portifoliedb" store:Type="Tables" />
           <EntitySet Name="tbluser" EntityType="Self.tbluser" Schema="portifoliedb" store:Type="Tables" />
           <EntitySet Name="tblwork" EntityType="Self.tblwork" Schema="portifoliedb" store:Type="Tables" />
+          <AssociationSet Name="ID" Association="Self.ID">
+            <End Role="tbluser" EntitySet="tbluser" />
+            <End Role="tblportfolio" EntitySet="tblportfolio" />
+          </AssociationSet>
           <AssociationSet Name="tbleducation_ibfk_1" Association="Self.tbleducation_ibfk_1">
             <End Role="tblportfolio" EntitySet="tblportfolio" />
             <End Role="tbleducation" EntitySet="tbleducation" />
-          </AssociationSet>
-          <AssociationSet Name="tblportfolio_ibfk_1" Association="Self.tblportfolio_ibfk_1">
-            <End Role="tbluser" EntitySet="tbluser" />
-            <End Role="tblportfolio" EntitySet="tblportfolio" />
           </AssociationSet>
           <AssociationSet Name="tblwork_ibfk_1" Association="Self.tblwork_ibfk_1">
             <End Role="tblportfolio" EntitySet="tblportfolio" />
             <End Role="tblwork" EntitySet="tblwork" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="portifolieDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -117,6 +119,7 @@
           <Property Name="eduSchool" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="portID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblportfolio" Relationship="Self.tbleducation_ibfk_1" FromRole="tbleducation" ToRole="tblportfolio" />
+          <Property Name="eduAddress" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblportfolio">
           <Key>
@@ -124,10 +127,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="portDescription" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbleducations" Relationship="Self.tbleducation_ibfk_1" FromRole="tblportfolio" ToRole="tbleducation" />
-          <NavigationProperty Name="tbluser" Relationship="Self.tblportfolio_ibfk_1" FromRole="tblportfolio" ToRole="tbluser" />
           <NavigationProperty Name="tblworks" Relationship="Self.tblwork_ibfk_1" FromRole="tblportfolio" ToRole="tblwork" />
+          <NavigationProperty Name="tbluser" Relationship="portifolieDbModel.ID" FromRole="tblportfolio" ToRole="tbluser" />
         </EntityType>
         <EntityType Name="tbluser">
           <Key>
@@ -138,7 +140,9 @@
           <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userDescription" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="userPicture" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblportfolios" Relationship="Self.tblportfolio_ibfk_1" FromRole="tbluser" ToRole="tblportfolio" />
+          <Property Name="userFullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="userAddress" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblportfolio" Relationship="portifolieDbModel.ID" FromRole="tbluser" ToRole="tblportfolio" />
         </EntityType>
         <EntityType Name="tblwork">
           <Key>
@@ -153,6 +157,7 @@
           <Property Name="workReferenceNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="portID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tblportfolio" Relationship="Self.tblwork_ibfk_1" FromRole="tblwork" ToRole="tblportfolio" />
+          <Property Name="workAddress" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="tbleducation_ibfk_1">
           <End Role="tblportfolio" Type="Self.tblportfolio" Multiplicity="1" />
@@ -163,18 +168,6 @@
             </Principal>
             <Dependent Role="tbleducation">
               <PropertyRef Name="portID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="tblportfolio_ibfk_1">
-          <End Role="tbluser" Type="Self.tbluser" Multiplicity="1" />
-          <End Role="tblportfolio" Type="Self.tblportfolio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tbluser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tblportfolio">
-              <PropertyRef Name="userID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -199,15 +192,27 @@
             <End Role="tblportfolio" EntitySet="tblportfolios" />
             <End Role="tbleducation" EntitySet="tbleducations" />
           </AssociationSet>
-          <AssociationSet Name="tblportfolio_ibfk_1" Association="Self.tblportfolio_ibfk_1">
-            <End Role="tbluser" EntitySet="tblusers" />
-            <End Role="tblportfolio" EntitySet="tblportfolios" />
-          </AssociationSet>
           <AssociationSet Name="tblwork_ibfk_1" Association="Self.tblwork_ibfk_1">
             <End Role="tblportfolio" EntitySet="tblportfolios" />
             <End Role="tblwork" EntitySet="tblworks" />
           </AssociationSet>
+          <AssociationSet Name="ID" Association="portifolieDbModel.ID">
+            <End Role="tbluser" EntitySet="tblusers" />
+            <End Role="tblportfolio" EntitySet="tblportfolios" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="ID">
+          <End Type="portifolieDbModel.tbluser" Role="tbluser" Multiplicity="1" />
+          <End Type="portifolieDbModel.tblportfolio" Role="tblportfolio" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbluser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblportfolio">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -217,6 +222,7 @@
           <EntitySetMapping Name="tbleducations">
             <EntityTypeMapping TypeName="portifolieDbModel.tbleducation">
               <MappingFragment StoreEntitySet="tbleducation">
+                <ScalarProperty Name="eduAddress" ColumnName="eduAddress" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="eduStart" ColumnName="eduStart" />
                 <ScalarProperty Name="eduFinish" ColumnName="eduFinish" />
@@ -231,13 +237,14 @@
               <MappingFragment StoreEntitySet="tblportfolio">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="portDescription" ColumnName="portDescription" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblusers">
             <EntityTypeMapping TypeName="portifolieDbModel.tbluser">
               <MappingFragment StoreEntitySet="tbluser">
+                <ScalarProperty Name="userAddress" ColumnName="userAddress" />
+                <ScalarProperty Name="userFullName" ColumnName="userFullName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="userPassword" ColumnName="userPassword" />
@@ -249,6 +256,7 @@
           <EntitySetMapping Name="tblworks">
             <EntityTypeMapping TypeName="portifolieDbModel.tblwork">
               <MappingFragment StoreEntitySet="tblwork">
+                <ScalarProperty Name="workAddress" ColumnName="workAddress" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="workStart" ColumnName="workStart" />
                 <ScalarProperty Name="workFinish" ColumnName="workFinish" />
