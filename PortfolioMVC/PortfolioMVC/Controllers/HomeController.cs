@@ -19,17 +19,7 @@ namespace PortfolioMVC.Controllers
 
         public ActionResult About()
         {
-            //var user = Session["isLoggedIn"];
-            //ViewBag.Message = "Your app description page.";
-            //if (user != null)
-            //{
-                return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index");
-            //}
-                        
+            return View();
         }
 
         [HttpPost]
@@ -56,13 +46,16 @@ namespace PortfolioMVC.Controllers
             return View(db.tblusers.Find(id));
         }
 
-        public ActionResult PortfolioEdit(){
+
+        public ActionResult PortfolioEdit()
+        {
             var user = (tbluser)Session["isLoggedIn"];
             var portfolio = db.tblportfolios.FirstOrDefault(x => x.ID == user.ID);
-            if (user != null&&portfolio!=null)
+            if (user != null && portfolio != null)
                 return View(portfolio);
             else
                 return RedirectToAction("Index");
+            return View(user);
         }
     }
 }
