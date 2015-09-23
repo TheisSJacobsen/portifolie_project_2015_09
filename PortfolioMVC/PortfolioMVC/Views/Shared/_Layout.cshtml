@@ -10,6 +10,18 @@
     </head>
     <body>
         <header>
+            <div class="loginBar">
+                @if (Session["isLoggedIn"] == null)
+                {
+                    @Html.ActionLink("Log In","Login","Home")
+                }
+                @if (Session["isLoggedIn"] != null){
+                    @Html.ActionLink(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userName,"PortfolioEdit", "Home")
+                    @Html.ActionLink("Log Out","Logout", "Home")
+                }
+            </div>
+        </header>
+        <header>
             <div class="content-wrapper">
                 <div class="float-left">
                     <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>

@@ -1,77 +1,47 @@
-create table tblUser
+CREATE TABLE `tbluser` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(70) NOT NULL,
+  `userPassword` varchar(50) NOT NULL,
+  `userFullName` varchar(250) NOT NULL,
+  `userDescription` text,
+  `userPicture` blob,
+  `userAddress` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8
 
-(
-
-ID int auto_increment not null primary key,
-
-userName varchar(70) not null,
-
-userPassword varchar(50) not null,
-
-userFullName varchar(250) not null,
-userDescription text(21844),
-
-userPicture text(21844)
-
-);
-
-create table tblPortfolio
-
-(
-
-ID int auto_increment not null primary key,
-
-portDescription text(21844),
-
-userID int not null,
+CREATE TABLE `tblportfolio` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `portDescription` text,
+  PRIMARY KEY (`ID`),
+  CONSTRAINT `ID` FOREIGN KEY (`ID`) REFERENCES `tbluser` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
 
 
-foreign key(userID) references tblUser(ID)
-
-);
-
-create table tblWork
-
-(
-
-ID int auto_increment not null primary key,
-
-workStart datetime,
-
-workFinish datetime,
-
-workName varchar(300) not null,
-
-workTitle varchar(50),
-
-workReferenceName varchar(250),
-
-workReferenceNumber varchar(15),
-
-portID int not null,
+CREATE TABLE `tblwork` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `workStart` datetime DEFAULT NULL,
+  `workFinish` datetime DEFAULT NULL,
+  `workName` varchar(300) NOT NULL,
+  `workTitle` varchar(50) DEFAULT NULL,
+  `workReferenceName` varchar(250) DEFAULT NULL,
+  `workReferenceNumber` varchar(15) DEFAULT NULL,
+  `workAddress` varchar(1000) DEFAULT NULL,
+  `portID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `portID` (`portID`),
+  CONSTRAINT `tblwork_ibfk_1` FOREIGN KEY (`portID`) REFERENCES `tblportfolio` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 
-foreign key(portID) references tblPortfolio(ID)
-
-);
-
-create table tblEducation
-
-(
-
-ID int auto_increment not null primary key,
-
-eduStart datetime,
-
-eduFinish datetime,
-
-eduName varchar(50) not null,
-
-eduSchool varchar(50) not null,
-
-portID int not null,
-
-
-foreign key(portID) references tblPortfolio(ID)
-
-);
+CREATE TABLE `tbleducation` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `eduStart` datetime DEFAULT NULL,
+  `eduFinish` datetime DEFAULT NULL,
+  `eduName` varchar(50) NOT NULL,
+  `eduSchool` varchar(50) NOT NULL,
+  `eduAddress` varchar(1000) DEFAULT NULL,
+  `portID` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `portID` (`portID`),
+  CONSTRAINT `tbleducation_ibfk_1` FOREIGN KEY (`portID`) REFERENCES `tblportfolio` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

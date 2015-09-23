@@ -1,0 +1,4 @@
+show create table tbleducation;
+show create table tblportfolio;
+show create table tbluser;
+show create table tblwork;

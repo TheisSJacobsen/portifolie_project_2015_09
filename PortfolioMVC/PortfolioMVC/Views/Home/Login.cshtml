@@ -4,15 +4,15 @@
 }
 <script>
     function Validate(form) {
-        if (form["userName"].value == null || form["userName"].value == "" || form["userPassword"].value == null || form["userPassword"].value == "") {
-
+        if (form["userName"].value == null || form["userName"].value == "" || form["password"].value == null || form["password"].value == "") {
+            alert("you cannot have an empty username or password. Try again... -_-*")
             return false;
         }
         return true;
     }
 </script>
 <h2>Login</h2>
-<div class="notLoggedIn">@ViewBag.Message</div>
+<div id="notLoggedIn">@ViewBag.Message</div>
 <section class="loginForm">
     <form  method="post" onsubmit="return Validate(this)">
         @Html.AntiForgeryToken()

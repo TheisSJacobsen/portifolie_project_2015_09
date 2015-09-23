@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "CreateUser";
+}
+
+<h2>CreateUser</h2>
+<script>
+    function Validate(form) {
+        if (form["password"].value!=form["re_password"].value) {
+            alert("Your passwords do not match. Please rewrite them both to be sure you got it rigth.");
+            return false;
+        }
+        else
+            return true;
+    }
+</script>
+
+<div id="userExist">@ViewBag.Message</div>
+<section class="createUserForm">
+    <form method="post" onsubmit="return Validate(this)">
+        <input type="text" name="fullname" value="" pattern="^(([a-zA-Z]|\p{L})+\s)*([a-zA-Z]|\p{L})+$" placeholder="Enter your fullname" required />
+        <input type="text" name="username" value="" pattern="^(\w|\p{L})*" placeholder="Enter your username" required />
+        <input type="password" name="password" value="" placeholder="Enter your password" required />
+        <input type="password" name="re_password" value="" placeholder="Reenter your password to confirm it" required />
+        <input type="submit" value="Create" />
+    </form>
+</section>

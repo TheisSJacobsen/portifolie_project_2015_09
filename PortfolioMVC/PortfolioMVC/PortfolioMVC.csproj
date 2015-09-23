@@ -342,6 +342,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Portfolie.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

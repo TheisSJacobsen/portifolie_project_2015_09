@@ -31,6 +31,12 @@ namespace PortfolioMVC.Controllers
             //}
                         
         }
+        public ActionResult Logout()
+        {
+            Session["isLoggedIn"] = null;
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -52,8 +58,31 @@ namespace PortfolioMVC.Controllers
             }
             //return View();
         }
-        
-        
+
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string username, string password, string fullname)
+        {
+            tbluser usr = db.tblusers.Where(x => x.userName.Equals(username)).FirstOrDefault();
+            if (usr == null)
+            {
+                usr = new tbluser { userName = username, userPassword = password, userFullName = fullname };
+                db.tblusers.Add(usr);
+                db.SaveChanges();
+                Session["isLoggedIn"] = usr;
+                return RedirectToAction("PortfolioEdit");
+            }
+            else
+            {
+                ViewBag.Message = "User already exist. Try another Username";
+                return View();
+            }
+            //return View();
+        }
 
         public ActionResult Contact()
         {
