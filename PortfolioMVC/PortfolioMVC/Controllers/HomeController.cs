@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PortfolioMVC.Models;
 
 namespace PortfolioMVC.Controllers
 {
@@ -54,13 +56,26 @@ namespace PortfolioMVC.Controllers
 
         public ActionResult PortfolioEdit()
         {
-            var user = (tbluser)Session["isLoggedIn"];
-            var portfolio = db.tblportfolios.FirstOrDefault(x => x.ID == user.ID);
-            if (user != null && portfolio != null)
-                return View(portfolio);
+            //var user = (tbluser)Session["isLoggedIn"];
+            var user = db.tblusers.FirstOrDefault(x => x.ID == 1);
+            //var portfolio = db.tblportfolios.FirstOrDefault(x => x.ID == user.ID);
+            if (user != null)
+                return View(user);
             else
                 return RedirectToAction("Index");
-            return View(user);
+            //return View(user);
+        }
+
+        //[HttpPost]
+        //public ActionResult PortfolioEdit()
+        //{
+
+        //    return RedirectToAction("Index");
+        //}
+        [HttpPost]
+        public ActionResult UserPost(RogueModel model)
+        {
+            return RedirectToAction("PortfolioEdit");
         }
     }
 }

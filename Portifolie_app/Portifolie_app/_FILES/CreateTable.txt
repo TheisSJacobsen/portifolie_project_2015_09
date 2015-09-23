@@ -11,8 +11,8 @@ userPassword varchar(50) not null,
 userFullName varchar(250) not null,
 userDescription text(21844),
 
-userPicture text(21844)
-,
+userPicture text(21844),
+
 userAddress varchar(1000)
 );
 

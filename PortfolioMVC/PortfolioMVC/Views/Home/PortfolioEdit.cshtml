@@ -1,47 +1,155 @@
-﻿@{
+﻿@model PortfolioMVC.Models.RogueModel
+@{
     ViewBag.Title = "PortfolioEdit";
 }
+<script>
+    function uploadPreview() {
+        var imgprev = document.querySelector('img');
+        var upload = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
 
-<h2>@Model.userFullName's Portfolie Editing</h2>
-
-<form action="/" method="post" onsubmit="return Validate(this)">
-
-<div class="userInfo">
-    <img src="@Model.userPicture" alt="Img Not found" />
-    <p>Full name: </p> <input type="text" placeholder="@Model.userFullName" />
-    <input type="text" placeholder="@Model.userDescription" />
-</div>
-@if (Model.tblportfolio!= null) { 
-<div class="uddannelser">
-    <ul>
-        @foreach (var edu in Model.tblportfolio.tbleducations) { 
-        <li>
-            <h2 class="subject">Linje: @edu.eduName</h2>
-            <p class="dato">Påstartet: @edu.eduStart</p>
-            <p class="dato">Afsluttet: @edu.eduFinish</p>
-            <p class="schoolName">Skolenavn: @edu.eduSchool</p>
-            <div class="edu map" data-location="@edu.eduAddress"></div>
-        </li>
+        reader.onload = function () {
+            imgprev.src = reader.result;
         }
-    </ul>
-</div>
-<div class="jobs">
-    <ul>
-        @foreach (var job in Model.tblportfolio.tblworks) { 
-        <li>
-            <h2>@job.workName</h2>
-            <p class="dato">Påstartet: @job.workStart</p>
-            <p class="dato">Afsluttet: @job.workFinish</p>
-            <p class="jobTitle">Title: @job.workTitle</p>
-            <p class="referance">Refferance: @job.workReferenceName tlf:@job.workReferenceNumber</p>
-            <div class="work map" data-location="@job.workAddress"></div>
-        </li>
-        }
-    </ul>
-</div>
-<p id="portfolieDescription">Beskrivelse: @Model.tblportfolio.portDescription</p>
+
+        if (upload)
+            reader.readAsDataURL(upload);
+        else
+            imgprev.src = "";
+    }
+
+    uploadPreview();
+</script>
+<h2>@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userFullName)'s Portfolie Editing</h2>
+
+@using (Html.BeginForm("UserPost", "Home", FormMethod.Post))
+{
+    @Html.TextBoxFor(x=>x.fullName)
+    @Html.TextBoxFor(x => x.description)
+    @Html.TextBoxFor(x => x.address)
+    @*@Html.TextBoxFor(x => x.image)*@
+    <button type="submit">Save Changes</button>
 }
-<input type="text" placeholder="@Model.userAddress" />
-<div class="user map" data-location="@Model.userAddress"></div>
-    <input type="submit" name="Save" value="Save Edit" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<form method="post" onsubmit="">
+
+    <div class="userInfo">
+        <img id="image" src="@Model.userPicture" alt="Img Not found" style="max-height:200px;" /><br />
+        <input type="file" onchange="uploadPreview()" name="fileuploader" />
+        <br />
+
+        <input name="fullname" type="text" value="@Model.userFullName" placeholder="Enter full name here" />
+
+        <br />
+
+        <textarea name="decription" placeholder="Enter description of you">@Model.userDescription</textarea>
+          <textarea name="portfoliodescription" placeholder="Description about your portfolio">@Model.tblportfolio.portDescription</textarea>
+   <input name="address" type="text" value="@Model.userAddress" placeholder="Enter your address" />
+   
+    </div>
+        <input type="submit" value="Save Edit" />
     </form>
+    @if (Model.tblportfolio != null)
+    { 
+        <form method="post" onsubmit="">
+        <div class="uddannelser">
+            <h3>Educations</h3>
+            <ul>
+                @if (Model.tblportfolio.tbleducations.Count == 0)
+                {
+                    <li>
+                        <input name="eduname" type="text" placeholder="Education name" />
+                        <input name="schoolname" type="text" placeholder="School Name" />
+                    </li>
+                    <li>
+                        <p>Start date</p>
+                        <input name="edustartdate" type="datetime" />
+                        <p>End date</p>
+                        <input name="edufinishdate" type="datetime" />
+                    </li>
+                    <li>
+                        <input name="eduaddress" type="text" placeholder="Education address" />
+                    </li>
+                }
+                else
+                {
+                    foreach (var edu in Model.tblportfolio.tbleducations)
+                    { 
+                    <li>
+                        <input type="text" placeholder="Education name" value="@edu.eduName" />
+                        <input type="text" placeholder="School Name" value="@edu.eduSchool" />
+                    </li>
+                    <li>
+                        <p>Start date</p>
+                        <input type="datetime" value="@edu.eduStart" />
+                        <p>End date</p>
+                        <input type="datetime" value="@edu.eduFinish" />
+                    </li>
+                    <li>
+                        <input type="text" placeholder="Education address" value="@edu.eduAddress"/>
+                    </li>
+                    }
+                }
+
+            </ul>
+        </div>
+                <input type="submit" value="Save Edit" />
+            </form>
+        <form method="post" onsubmit="">
+        <div class="jobs">
+            <h3>Work places</h3>
+            <ul>
+                @if (Model.tblportfolio.tblworks.Count == 0)
+                {
+                    <li>
+                        <input name="workname" type="text" placeholder="Work name" />
+                    </li>
+                    <li>
+                        <p>Start date</p>
+                        <input name="workstartdate" type="datetime" />
+                        <p>End date</p>
+                        <input name="workfinishdate" type="datetime" />
+                    </li>
+                    <li>
+                        <input name="workaddress" type="text" placeholder="Work address" />
+                    </li>
+                    <li>
+                        <input name="refernceperson" type="text" placeholder="Work reference person" />
+                        <input name="referencenumber" type="text" placeholder="Work reference phone number" />
+                    </li>
+                }
+                @foreach (var job in Model.tblportfolio.tblworks)
+                { 
+                    <li>
+                        <h2>@job.workName</h2>
+                        <p class="dato">Påstartet: @job.workStart</p>
+                        <p class="dato">Afsluttet: @job.workFinish</p>
+                        <p class="jobTitle">Title: @job.workTitle</p>
+                        <p class="referance">Refferance: @job.workReferenceName tlf:@job.workReferenceNumber</p>
+                        <div class="work map" data-location="@job.workAddress"></div>
+                    </li>
+                }
+            </ul>
+        </div>
+                <input type="submit" value="Save Edit" />
+    </form>
+        <br />
+    
+    
+    }*@
+
+    <br />
+
+    @*<div class="user map" data-location="@Model.userAddress"></div>*@
