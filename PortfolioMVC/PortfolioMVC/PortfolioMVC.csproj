@@ -342,6 +342,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Portfolie.cshtml" />
     <Content Include="Views\Home\PortfolioEdit.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

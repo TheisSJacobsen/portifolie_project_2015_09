@@ -2,5 +2,20 @@
     ViewBag.Title = "Login";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script>
+    function Validate(form) {
+        if (form["userName"].value == null || form["userName"].value == "" || form["userPassword"].value == null || form["userPassword"].value == "") {
+            return false;
+        }
+        return true;
+    }
+</script>
 <h2>Login</h2>
+<section class="loginForm">
+    <form action="/" method="post" onsubmit="return Validate(this)">
+        @Html.AntiForgeryToken()
+        <input type="text" name="userName" value="" placeholder="Enter your username" />
+        <input type="password" name="userPassword" value="" placeholder="Enter your password" />
+        <input type="submit" value="Login" />
+    </form>
+</section>
