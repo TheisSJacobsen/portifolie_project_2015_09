@@ -31,11 +31,15 @@ namespace PortfolioMVC.Controllers
             //}
                         
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            tbluser usr = db.tblusers.Where(x => x.userName.Equals(username) && x.userPassword.Equals(password)).First();
+            tbluser usr = db.tblusers.Where(x => x.userName.Equals(username) && x.userPassword.Equals(password)).FirstOrDefault();
             if (usr != null)
             {
                 Session["isLoggedIn"] = usr;
@@ -46,12 +50,10 @@ namespace PortfolioMVC.Controllers
                 ViewBag.Message = "Not Logged In.";
                 return View();
             }
+            //return View();
         }
         
-        public ActionResult Login()
-        {
-            return View();
-        }
+        
 
         public ActionResult Contact()
         {
