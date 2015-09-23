@@ -207,6 +207,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\RogueModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tbleducation.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -341,12 +342,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Portfolie.cshtml" />
+    <Content Include="Views\Home\PortfolioEdit.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
