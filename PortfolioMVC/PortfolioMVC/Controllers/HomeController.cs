@@ -35,13 +35,17 @@ namespace PortfolioMVC.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            tbluser usr = db.tblusers.Where(x => x.userName.Equals(username) && x.userPassword.Equals(password)).FirstOrDefault();
-            if (usr!=null)
+            tbluser usr = db.tblusers.Where(x => x.userName.Equals(username) && x.userPassword.Equals(password)).First();
+            if (usr != null)
             {
                 Session["isLoggedIn"] = usr;
+                return RedirectToAction("Index");
             }
-
-            return RedirectToAction("Index");
+            else
+            {
+                ViewBag.Message = "Not Logged In.";
+                return View();
+            }
         }
         
         public ActionResult Login()
