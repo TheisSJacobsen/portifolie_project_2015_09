@@ -95,7 +95,7 @@ namespace PortfolioMVC.Controllers
             var user = db.tblusers.FirstOrDefault(x => x.ID == 1);
             //var portfolio = db.tblportfolios.FirstOrDefault(x => x.ID == user.ID);
             if (user != null)
-                return View(user);
+                return View();
             else
                 return RedirectToAction("Index");
             //return View(user);
