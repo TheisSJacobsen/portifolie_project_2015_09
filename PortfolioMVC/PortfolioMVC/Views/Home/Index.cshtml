@@ -25,7 +25,7 @@
     {
     <li>
         <a href="/Home/Portfolie?id=@user.ID">
-            <img src="@user.userPicture" alt="Alternate Text" />Portfolio of @user.userFullName
+            @if(user.userPicture!=null){<img src="@user.userPicture" alt="Alternate Text" />}Portfolio of @user.userFullName
         </a>
     </li>
     }
