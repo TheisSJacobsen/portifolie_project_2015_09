@@ -2,6 +2,7 @@
     ViewBag.Title = "Login";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="@Url.Content("~/Content/loginStyle.css")" rel="stylesheet" type="text/css" />
 <script>
     function Validate(form) {
         if (form["userName"].value == null || form["userName"].value == "" || form["password"].value == null || form["password"].value == "") {
@@ -18,6 +19,7 @@
         @Html.AntiForgeryToken()
         <input type="text" name="userName" value="" placeholder="Enter your username" />
         <input type="password" name="password" value="" placeholder="Enter your password" />
+        <br />
         <input type="submit" value="Login" />
     </form>
 </section>

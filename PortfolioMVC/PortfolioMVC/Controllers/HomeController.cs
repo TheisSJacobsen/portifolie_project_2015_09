@@ -14,7 +14,7 @@ namespace PortfolioMVC.Controllers
         private portifolieDbEntities db = new portifolieDbEntities();
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "";
 
             return View(db.tblusers.ToList());
         }
