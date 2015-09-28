@@ -5,7 +5,7 @@
 
 <h2>@Model.userFullName's Portfolie</h2>
 <div class="userInfo">
-    <img src="@Model.userPicture" alt="Img Not found" />
+    <img src="@Model.userPicture" alt="Img Not found" onerror="src='//Images/DefUser.png'" />
     <p id="fullName">Fulde navn: @Model.userFullName</p>
     <p id="freetext">@Model.userDescription</p>
 </div>
