@@ -31,6 +31,16 @@
     .middleWidth {
         max-width: 888px;
     }
+    form .delete {
+        background: url("/Images/error.png");
+        background-size: cover;
+        width: 16px;
+        height: 16px;
+        border:0;
+    }
+    .educations form, .jobs form,h2 {
+        display: -webkit-inline-box;
+    }
 </style>
 <div class="middleWidth">
     <h2>@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userFullName)'s Portfolie Editing</h2>
@@ -50,11 +60,11 @@
         @foreach (var edu in Model.tblportfolio.tbleducations)
         {
             <li>
-                <h2 class="subject">Linje: @edu.eduName</h2>
-                @Html.BeginForm("educationRemove", "home", FormMethod.Post)
+                <h2 class="subject">@edu.eduName</h2>
+                @using (Html.BeginForm("educationRemove", "home", FormMethod.Post))
                 {
                 <input type="hidden" name="id" value="@edu.ID" />
-                <button type="submit"><img src="@ViewBag.ErrorImg" alt="Delete" /></button>
+                <input class="delete" type="submit" title="Delete" value="">
                 }
                 <p class="dato">Påstartet: @edu.eduStart</p>
                 <p class="dato">Afsluttet: @edu.eduFinish</p>
@@ -79,10 +89,10 @@
         {
             <li>
                 <h2>@job.workName</h2>
-                @Html.BeginForm("jobRemove", "home", FormMethod.Post)
+                @using (Html.BeginForm("jobRemove", "home", FormMethod.Post))
                 {
                 <input type="hidden" name="id" value="@job.ID" />
-                <button type="submit"><img src="@ViewBag.ErrorImg" alt="Delete" /></button>
+                <input class="delete" type="submit" title="Delete" value="">
                 }
                 <p class="dato">Påstartet: @job.workStart</p>
                 <p class="dato">Afsluttet: @job.workFinish</p>
@@ -105,7 +115,7 @@
         <input type="submit" value="Add" />
     }
     <h1>Portfolio</h1>
-    @Html.BeginForm("portfolioDescription", "home", FormMethod.Post){
+    @using (Html.BeginForm("portfolioDescription", "home", FormMethod.Post)){
     <textarea name="description" rows="4" cols="50">@Model.tblportfolio.portDescription</textarea>
     <input type="submit" name="name" value=" " />
     }

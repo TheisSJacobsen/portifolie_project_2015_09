@@ -130,6 +130,7 @@ namespace PortfolioMVC.Controllers
             var edu=db.tbleducations.FirstOrDefault(x => x.ID == id);
             if(edu!=null)
                 db.tbleducations.Remove(edu);
+            db.SaveChanges();
             return RedirectToAction("PortfolioEdit");
         }
 
@@ -148,6 +149,7 @@ namespace PortfolioMVC.Controllers
             var work = db.tblworks.FirstOrDefault(x => x.ID == id);
             if (work != null)
                 db.tblworks.Remove(work);
+            db.SaveChanges();
             return RedirectToAction("PortfolioEdit");
         }
 
