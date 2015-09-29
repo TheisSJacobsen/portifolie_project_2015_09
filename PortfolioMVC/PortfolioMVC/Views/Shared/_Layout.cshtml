@@ -9,11 +9,27 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/modernizr")
     </head>
+    <style>
+        .imglogo
+        {
+                height: 70px;
+                width: 70px;
+                float: left;
+        }
+        .alogo
+        {
+                width: 0;
+                height: 0;
+                padding: 0;
+        }
+    </style>
     <body>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                    <a href="@Url.Action("Index", "Home")" class="alogo">
+                        <img src="~/Images/logo.png" class="imglogo" />
+                    </a>
                 </div>
                 <div class="float-right">
                     <section id="login">
