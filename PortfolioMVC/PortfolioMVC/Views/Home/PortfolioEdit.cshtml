@@ -4,118 +4,8 @@
     ViewBag.DefaultImg = "/Images/DefUser.png";
     ViewBag.ErrorImg = "/Images/error.png";
 }
-<script>
-    //function uploadPreview() {
-    //    var imgprev = $('#pic');
-    //    var upload = $('#uploader')[0];
-    //    var reader = new FileReader();
 
-    //    reader.onload = function () {
-    //        imgprev.src = reader.result;
-    //    }
-
-    //    if (upload)
-    //        reader.readAsDataURL(upload);
-    //    else
-    //        imgprev.src = "";
-    //}
-
-    //uploadPreview();
-    function onFileSelected(event){
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-        var pic = $('#pic')[0];
-        //var holder = $('#pic_hidden')[0];
-        //var vid={name:'',media_type:'',source:''};
-        reader.onload = function(event) {
-            pic.src = event.target.result;
-            //holder.value = event.target.result;
-        }
-        reader.readAsDataURL(selectedFile);
-    };
-    var status = $('#test_data');
-    var drop = $('#uploader');
-    var img = $('#pic');
-
-    if (window.FileReader) {
-        addEventHandler(window, 'load', function () {
-            
-
-            function cancel(e) {
-                if (e.preventDefault) { e.preventDefault(); }
-                return false;
-            }
-
-            // Tells the browser that we *can* drop on this target
-            addEventHandler(drop, 'dragover', cancel);
-            addEventHandler(drop, 'dragenter', cancel);
-        });
-    } else {
-        $('#test_data').innerHTML = 'Your browser does not support the HTML5 FileReader.';
-    }
-    function addEventHandler(obj, evt, handler) {
-        if (obj.addEventListener) {
-            // W3C method
-            obj.addEventListener(evt, handler, false);
-        } else if (obj.attachEvent) {
-            // IE method.
-            obj.attachEvent('on' + evt, handler);
-        } else {
-            // Old school method.
-            obj['on' + evt] = handler;
-        }
-    }
-    addEventHandler(drop, 'drop', function (e) {
-        e = e || window.event; // get window.event if e argument missing (in IE)   
-        if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
-
-        var data = e.dataTransfer;
-        var file = data.files[0];
-        
-        var reader = new FileReader();
-
-        //attach event handlers here...
-
-        reader.readAsDataURL(file);
-        
-        return false;
-    });
-    addEventHandler(reader, 'loadend', function (e, file) {
-        var bin = this.result;
-        img.src = bin;
-    }.bindToEventHandler(file));
-
-</script>
-<style>
-    #pic {
-        width: 250px;
-        float: right;
-    }
-
-    .middleWidth {
-        max-width: 888px;
-    }
-    form .delete {
-        background: url("/Images/error.png");
-        background-size: cover;
-        width: 16px;
-        height: 16px;
-        border:0;
-        -webkit-transition: all 0.5s ease-in-out;
-        -moz-transition: all 0.5s ease-in-out;
-        -ms-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-    }
-        form .delete:hover
-        {
-            height: 32px;
-            width: 32px;
-        }
-    .educations form, .jobs form,h2 {
-        display: -webkit-inline-box;
-    }
-</style>
+<link href="@Url.Content("~/Content/portfolioEdit.css")" rel="stylesheet" type="text/css" />
 <div class="middleWidth">
     <h2>@(Model.userFullName)'s Portfolie Editing</h2>
 
@@ -181,11 +71,11 @@
     @using (Html.BeginForm("jobAdd", "home", FormMethod.Post))
     {
         <h3>Add a Job</h3>
-        <input type="text" name="" placeholder="Name of field or title of job/work" />
-        <input type="text" name="" placeholder="Workplace name" />
-        <input type="text" name="" placeholder="Workplace address" />
-        <input type="text" name="" placeholder="Work Refferance Name" />
-        <input type="text" name="" placeholder="Work Refferance Number" />
+        <input type="text" name="jobname" placeholder="Name of field or title of job/work" />
+        <input type="text" name="companyname" placeholder="Workplace name" />
+        <input type="text" name="companyaddress" placeholder="Workplace address" />
+        <input type="text" name="refferanceName" placeholder="Work Refferance Name" />
+        <input type="text" name="refferanceNumber" placeholder="Work Refferance Number" />
         <p>From:</p> <input name="from" type="date" />
         <p>To:</p> <input name="to" type="date" />
         <input type="submit" value="Add" />
@@ -195,20 +85,6 @@
     <textarea name="description" rows="4" cols="50">@Model.tblportfolio.portDescription</textarea>
     <input type="submit" name="name" value="Change" />
     }
-
-
-
-
-
-
-
-
-
-    
-
     <br />
 </div>
-
-
-
-@*<div class="user map" data-location="@Model.userAddress"></div>*@
+<script src="@Url.Content("~/Scripts/portfolioEditScript.js")"></script>

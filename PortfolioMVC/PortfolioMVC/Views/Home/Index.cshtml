@@ -12,6 +12,7 @@
         </div>
     </section>
 }
+<link href="@Url.Content("~/Content/indexStyle.css")" rel="stylesheet" type="text/css" />
 <h1>Portfolio List</h1>
 
 <ul>
@@ -19,7 +20,7 @@
     {
     <li class="portfolios">
         <a href="/Home/Portfolie?id=@user.ID">
-            @if(user.userPicture!=null){<img src="@user.userPicture" alt="Alternate Text" />}Portfolio of @user.userFullName
+            Portfolio of @user.userFullName @if (user.userPicture != null){<img src="@user.userPicture" alt="Alternate Text" />}
         </a>
     </li>
     }
