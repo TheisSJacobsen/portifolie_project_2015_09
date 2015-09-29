@@ -14,7 +14,7 @@ namespace PortfolioMVC.Controllers
         private portifolieDbEntities db = new portifolieDbEntities();
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "";
 
             return View(db.tblusers.ToList());
         }
@@ -91,26 +91,80 @@ namespace PortfolioMVC.Controllers
 
         public ActionResult PortfolioEdit()
         {
-            //var user = (tbluser)Session["isLoggedIn"];
-            var user = db.tblusers.FirstOrDefault(x => x.ID == 1);
-            //var portfolio = db.tblportfolios.FirstOrDefault(x => x.ID == user.ID);
+            var user = (tbluser)Session["isLoggedIn"];
             if (user != null)
                 return View();
             else
                 return RedirectToAction("Index");
-            //return View(user);
         }
 
-        //[HttpPost]
-        //public ActionResult PortfolioEdit()
-        //{
 
-        //    return RedirectToAction("Index");
-        //}
         [HttpPost]
-        public ActionResult UserPost(RogueModel model)
+        public ActionResult UserPost(string fullname, string description, string address, string pic)
+        {   
+            var sessionUser=(tbluser)Session["isLoggedIn"];
+            var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
+            user.userFullName = fullname;
+            user.userDescription = description;
+            user.userAddress = address;
+            if(pic!=null)
+                if(!pic.Equals("//Images/DefUser.png"))
+                    user.userPicture = pic;
+            db.SaveChanges();
+            return RedirectToAction("PortfolioEdit");
+        }
+
+        [HttpPost]
+        public ActionResult EducationAdd(string subject, string school, string address, DateTime from, DateTime to)
+        {
+            var user = GetUserWithPortfolio();
+            var education = new tbleducation { eduName = subject, eduSchool = school, eduAddress = address, eduStart = from, eduFinish = to };
+            user.tblportfolio.tbleducations.Add(education);
+            db.SaveChanges();
+            return RedirectToAction("PortfolioEdit");
+        }
+
+        [HttpPost]
+        public ActionResult EducationRemove(int id)
+        {
+            var edu=db.tbleducations.FirstOrDefault(x => x.ID == id);
+            if(edu!=null)
+                db.tbleducations.Remove(edu);
+            return RedirectToAction("PortfolioEdit");
+        }
+
+        [HttpPost]
+        public ActionResult JobAdd(string jobname, string companyname, string companyaddress, string refferanceName, string refferanceNumber, DateTime from, DateTime to)
+        {
+            var user = GetUserWithPortfolio();
+            user.tblportfolio.tblworks.Add(new tblwork { workStart = from, workFinish = to, workTitle = jobname, workName = companyname, workAddress = companyaddress, workReferenceName = refferanceName, workReferenceNumber = refferanceNumber });
+            db.SaveChanges();
+            return RedirectToAction("PortfolioEdit");
+        }
+
+        [HttpPost]
+        public ActionResult JobRemove(int id)
+        {
+            var work = db.tblworks.FirstOrDefault(x => x.ID == id);
+            if (work != null)
+                db.tblworks.Remove(work);
+            return RedirectToAction("PortfolioEdit");
+        }
+
+        [HttpPost]
+        public ActionResult PortfolioDescription(string description)
         {
             return RedirectToAction("PortfolioEdit");
+        }
+
+        private tbluser GetUserWithPortfolio()
+        {
+            var sessionUser = (tbluser)Session["isLoggedIn"];
+            var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
+            var portfolio = user.tblportfolio;
+            if (portfolio == null)
+                user.tblportfolio = new tblportfolio();
+            return user;
         }
     }
 }

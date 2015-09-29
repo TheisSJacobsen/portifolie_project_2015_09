@@ -17,8 +17,8 @@
 <div id="userExist">@ViewBag.Message</div>
 <section class="createUserForm">
     <form method="post" onsubmit="return Validate(this)">
-        <input type="text" name="fullname" value="" pattern="^(([a-zA-Z]|\p{L})+\s)*([a-zA-Z]|\p{L})+$" placeholder="Enter your fullname" required />
-        <input type="text" name="username" value="" pattern="^(\w|\p{L})*" placeholder="Enter your username" required />
+        <input type="text" name="fullname" value="" pattern="^(([a-zA-Z]|\p{L})+\s)*([a-zA-Z]|\p{L})+$" placeholder="Enter your fullname" required title="Kun tekst og mellemrum er tilladt."/>
+        <input type="text" name="username" value="" pattern="^(\w|\p{L})*" placeholder="Enter your username" required title="Kun teskt og tal tilladt."/>
         <input type="password" name="password" value="" placeholder="Enter your password" required />
         <input type="password" name="re_password" value="" placeholder="Reenter your password to confirm it" required />
         <input type="submit" value="Create" />
