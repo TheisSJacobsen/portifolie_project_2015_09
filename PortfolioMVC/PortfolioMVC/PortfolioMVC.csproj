@@ -224,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\indexStyle.css" />
+    <Content Include="Content\LayoutStyle.css" />
     <Content Include="Content\loginStyle.css" />
     <Content Include="Content\portfolioEdit.css" />
     <Content Include="Content\portfolioStyle.css" />
@@ -281,6 +282,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\vid.mp4" />
+    <Content Include="Content\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Model.edmx">
@@ -288,6 +291,9 @@
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Images\DefUser.png" />
+    <Content Include="Images\fog1.png" />
+    <Content Include="Images\fog2.png" />
+    <Content Include="Images\fog3.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

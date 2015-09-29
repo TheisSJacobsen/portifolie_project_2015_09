@@ -10,4 +10,4 @@ ul{
 }
 .portfolios:nth-child(even) {background: rgba(0,0,0,0.3);}
 .portfolios:nth-child(odd) {background: rgba(0,0,0,0);}
-.portfolios a{display:block;}
+.portfolios a{display:block;color:white;}

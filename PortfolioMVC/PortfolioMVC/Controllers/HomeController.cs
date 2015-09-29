@@ -176,6 +176,8 @@ namespace PortfolioMVC.Controllers
         private tbluser GetUserWithPortfolio()
         {
             var sessionUser = (tbluser)Session["isLoggedIn"];
+            if (sessionUser == null)
+                return null;
             var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
             var portfolio = user.tblportfolio;
             if (portfolio == null)

@@ -1,19 +1,27 @@
 ﻿html
 {
-    background-color: #e2e2e2;
+    background-color: rgba(68,67,67,1);
     margin: 0;
     padding: 0;
 }
 
 body
 {
-    background-color: #fff;
+    /*background-image:url("/Images/logo.png");*/
+    /*background-color: #1D1D1D;*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
+    border: 0;
+    color:white;
+    min-height: 580px;
+    text-shadow: 1px 1px #000;
 }
 
 a
@@ -33,7 +41,7 @@ a
 
     a:hover
     {
-        background-color: #c7d1d6;
+        background-color: rgba(199, 209, 214, 0.6);;
     }
 
 header, footer, hgroup,
@@ -71,7 +79,7 @@ mark
 h1, h2, h3,
 h4, h5, h6
 {
-    color: #000;
+    color: #FFF;
     margin-bottom: 0;
     padding-bottom: 0;
 }
@@ -118,9 +126,10 @@ h5, h6
 
 #body
 {
-    background-color: #efeeef;
+    /*background-color: #efeeef;*/
     clear: both;
     padding-bottom: 35px;
+    min-height: 337px;
 }
 
 .main-content
@@ -143,7 +152,7 @@ header .content-wrapper
 footer
 {
     clear: both;
-    background-color: #e2e2e2;
+    background-color: rgba(226, 226, 226, 0.19);;
     font-size: .8em;
     height: 100px;
 }
@@ -211,6 +220,7 @@ footer
 ----------------------------------------------------------*/
 ul#menu
 {
+    background-color:#d3dce0;
     font-size: 1.3em;
     font-weight: 600;
     margin: 0 0 5px;
@@ -244,17 +254,17 @@ ul#menu
 /* featured */
 .featured
 {
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
     .featured .content-wrapper
     {
-        background-color: #7ac0da;
-        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
-        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-color: rgba(122, 192, 218, 1);
+        background-image: -ms-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
+        background-image: -o-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(122, 192, 218, 1)), color-stop(1, rgba(164, 212, 230, 1)));
+        background-image: -webkit-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
+        background-image: linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
         color: #3e5667;
         padding: 20px 40px 30px 40px;
     }
