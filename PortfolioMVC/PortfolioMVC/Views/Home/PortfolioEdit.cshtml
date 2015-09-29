@@ -33,14 +33,14 @@
     }
 </style>
 <div class="middleWidth">
-    <h2>@(Model.userFullName)'s Portfolie Editing</h2>
+    <h2>@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userFullName)'s Portfolie Editing</h2>
 
     @using (Html.BeginForm("userpost", "home", FormMethod.Post))
     {
-        <img id="pic" onerror="this.src=@(ViewBag.DefaultImg)" src="@if (Model.userPicture != null) { @(Model.userPicture)  } else {  @(ViewBag.DefaultImg)  } " />
-        <input type="text" name="fullname" value="@(Model.userFullName)" />
-        <input type="text" name="description" value="@(Model.userDescription)" />
-        <input type="text" name="address" value="@(Model.userAddress)" />
+        <img id="pic" onerror="this.src=@(ViewBag.DefaultImg)" src="@if (((PortfolioMVC.tbluser)Session["isLoggedIn"]).userPicture != null) { @(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userPicture)  } else {  @(ViewBag.DefaultImg)  } " />
+        <input type="text" name="fullname" value="@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userFullName)" />
+        <input type="text" name="description" value="@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userDescription)" />
+        <input type="text" name="address" value="@(((PortfolioMVC.tbluser)Session["isLoggedIn"]).userAddress)" />
         <input id="uploader" type="file" placeholder="A picture of you" accept="image/*" onchange="onFileSelected(event);" />
 
         <input type="submit" value="Ændre" />
