@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PortfolioMVC.Models;
+using System.IO;
 
 namespace PortfolioMVC.Controllers
 {
@@ -100,16 +101,26 @@ namespace PortfolioMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult UserPost(string fullname, string description, string address, string pic)
+        public ActionResult UserPost(string fullname, string description, string address, HttpPostedFileBase pic)
         {   
             var sessionUser=(tbluser)Session["isLoggedIn"];
             var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
             user.userFullName = fullname;
             user.userDescription = description;
             user.userAddress = address;
-            //if(pic!=null)
-            //    if(!pic.Equals("//Images/DefUser.png"))
-            //        user.userPicture = pic;
+            if (pic != null && pic.ContentLength > 0)
+                if (!pic.Equals("/Images/DefUser.png"))
+                {
+                    var fileName = Path.GetFileName(pic.FileName);
+                    // store the file inside ~/App_Data/uploads folder
+
+                    var pathName = ("~/userImg/" + user.ID);
+                    System.IO.Directory.CreateDirectory(Server.MapPath(pathName));
+                    var path = Path.Combine(Server.MapPath(pathName), fileName);
+                    pic.SaveAs(path);
+                    user.userPicture = "/userImg/" + user.ID + "/" + fileName;
+                }
+                    
             db.SaveChanges();
             return RedirectToAction("PortfolioEdit");
         }
