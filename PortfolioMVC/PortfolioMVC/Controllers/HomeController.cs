@@ -107,9 +107,9 @@ namespace PortfolioMVC.Controllers
             user.userFullName = fullname;
             user.userDescription = description;
             user.userAddress = address;
-            if(pic!=null)
-                if(!pic.Equals("//Images/DefUser.png"))
-                    user.userPicture = pic;
+            //if(pic!=null)
+            //    if(!pic.Equals("//Images/DefUser.png"))
+            //        user.userPicture = pic;
             db.SaveChanges();
             return RedirectToAction("PortfolioEdit");
         }
