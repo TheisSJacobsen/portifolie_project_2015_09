@@ -91,9 +91,10 @@ namespace PortfolioMVC.Controllers
 
         public ActionResult PortfolioEdit()
         {
-            var user = (tbluser)Session["isLoggedIn"];
+            var sessionUser = (tbluser)Session["isLoggedIn"];
+            var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
             if (user != null)
-                return View();
+                return View(user);
             else
                 return RedirectToAction("Index");
         }
