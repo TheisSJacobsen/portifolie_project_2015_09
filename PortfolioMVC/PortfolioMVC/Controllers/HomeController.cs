@@ -41,7 +41,7 @@ namespace PortfolioMVC.Controllers
             if (usr != null)
             {
                 Session["isLoggedIn"] = usr;
-                return RedirectToAction("Index");
+                return RedirectToAction("PortfolioEdit");
             }
             else
             {
@@ -91,8 +91,7 @@ namespace PortfolioMVC.Controllers
 
         public ActionResult PortfolioEdit()
         {
-            var sessionUser = (tbluser)Session["isLoggedIn"];
-            var user = db.tblusers.SingleOrDefault(x => x.ID == (sessionUser.ID));
+            var user = GetUserWithPortfolio();
             if (user != null)
                 return View(user);
             else
@@ -155,6 +154,9 @@ namespace PortfolioMVC.Controllers
         [HttpPost]
         public ActionResult PortfolioDescription(string description)
         {
+            var user = GetUserWithPortfolio();
+            user.tblportfolio.portDescription = description;
+            db.SaveChanges();
             return RedirectToAction("PortfolioEdit");
         }
 

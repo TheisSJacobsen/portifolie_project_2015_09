@@ -2,6 +2,40 @@
 @{
     ViewBag.Title = "Portfolie";
 }
+<style>
+    .hide_me {
+        position: relative;
+        top: -205px;
+        -webkit-box-align: center;
+        -webkit-box-pack: center;
+        display: none;
+        /* max-width: 250px; */
+        /* display: -webkit-inline-box; */
+        padding: 2px;
+        padding-left: 6px;
+        padding-right: 6px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(247, 247, 247, 0.82);
+        border-radius: 10px 10px;
+    }
+    .hover_on_me {
+        width: 16px;
+        height: 30px;
+        position: relative;
+        top: -150px;
+        left: 227px;
+    }
+    .hover_on_me:hover ~ .hide_me{
+        display: table;
+        
+    }
+    .centered_content {
+        width: 470px;
+        max-height: 268px;
+    }
+</style>
 
 <h2>@Model.userFullName's Portfolie</h2>
 <div class="userInfo">
@@ -39,4 +73,10 @@
 </div>
 <p id="portfolieDescription">Beskrivelse: @Model.tblportfolio.portDescription</p>
 }
-<div class="user map" data-location="@Model.userAddress"></div>
+<div class="col-md-6 centered_content">
+    <img src="https://maps.googleapis.com/maps/api/staticmap?center=@(Model.userAddress)&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7C@(Model.userAddress)" alt="" width="470" />
+    <div class="hover_on_me"></div>
+    <div class="hide_me">@(Model.userAddress)</div>
+    
+</div>
+@*<div class="user map" data-location="@Model.userAddress"></div>*@
