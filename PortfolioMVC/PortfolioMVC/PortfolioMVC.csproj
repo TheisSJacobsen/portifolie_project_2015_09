@@ -223,8 +223,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\indexStyle.css" />
     <Content Include="Content\LayoutStyle.css" />
     <Content Include="Content\loginStyle.css" />
+    <Content Include="Content\portfolioEdit.css" />
+    <Content Include="Content\portfolioStyle.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -279,6 +282,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\vid.mp4" />
+    <Content Include="Content\video.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Model.edmx">
@@ -287,8 +292,6 @@
     </EntityDeploy>
     <Content Include="Images\DefUser.png" />
     <Content Include="Images\logo.png" />
-    <Content Include="Images\logomain.png" />
-    <Content Include="Images\Voelven.png" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -317,6 +320,10 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\portfolioEditScript.js" />
+    <Content Include="Scripts\VideoBgScript.js" />
+    <Content Include="userImg\1\467px-Shadowrun-logo.svg.png" />
+    <Content Include="userImg\1\Karneval.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
