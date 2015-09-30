@@ -142,7 +142,9 @@ h5, h6
 .featured + .main-content
 {
     background: url("../Images/heroAccent.png") no-repeat;
+
 }
+
 
 header .content-wrapper
 {
@@ -259,12 +261,12 @@ ul#menu
 
     .featured .content-wrapper
     {
-        background-color: rgba(122, 192, 218, 1);
-        background-image: -ms-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
-        background-image: -o-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(122, 192, 218, 1)), color-stop(1, rgba(164, 212, 230, 1)));
-        background-image: -webkit-linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
-        background-image: linear-gradient(left, rgba(122, 192, 218, 1) 0%, rgba(164, 212, 230, 1) 100%);
+        background-color: rgba(122, 192, 218, 0.6);
+        background-image: -ms-linear-gradient(left, rgba(122, 192, 218, 0.6) 0%, rgba(164, 212, 230, 0.6) 100%);
+        background-image: -o-linear-gradient(left, rgba(122, 192, 218, 0.6) 0%, rgba(164, 212, 230, 0.6) 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(122, 192, 218, 0.6)), color-stop(1, rgba(164, 212, 230, 0.6)));
+        background-image: -webkit-linear-gradient(left, rgba(122, 192, 218, 0.6) 0%, rgba(164, 212, 230, 0.6) 100%);
+        background-image: linear-gradient(left, rgba(122, 192, 218, 0.6) 0%, rgba(164, 212, 230, 0.6) 100%);
         color: #3e5667;
         padding: 20px 40px 30px 40px;
     }

@@ -9,5 +9,5 @@ ul{
     padding: 0;
 }
 .portfolios:nth-child(even) {background: rgba(0,0,0,0.3);}
-.portfolios:nth-child(odd) {background: rgba(0,0,0,0);}
+.portfolios:nth-child(odd) {background: rgba(255,255,255,0.3);}
 .portfolios a{display:block;color:white;}
