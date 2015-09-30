@@ -1,0 +1,13 @@
+﻿img{
+    max-height:250px;
+    max-width:250px;
+    vertical-align: -webkit-baseline-middle;
+
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+.portfolios:nth-child(even) {background: rgba(0,0,0,0.3);}
+.portfolios:nth-child(odd) {background: rgba(0,0,0,0);}
+.portfolios a{display:block;color:white;}

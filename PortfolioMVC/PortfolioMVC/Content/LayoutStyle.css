@@ -96,3 +96,29 @@
         transform: rotate(360deg);
     }
 }
+video#bgVideo {
+  position: fixed; // Play the video in full screen mode
+  top: 0px; 
+  left: 0px; 
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -2; // Put the video behind all other elements
+}
+#bgLogo{
+    background-image: url("/Images/logo.png");
+    /* background-color: #1D1D1D; */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    position: fixed; // Play the video in full screen mode
+    top: 0px; 
+    left: 0px; 
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: -1;
+    -webkit-filter:blur(2px);
+}
+body>header{
+    height: 110px;
+    background-color: rgba(240, 248, 255, 0.5);
+}

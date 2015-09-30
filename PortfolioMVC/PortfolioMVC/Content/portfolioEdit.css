@@ -1,0 +1,34 @@
+﻿#pic {
+    width: 250px;
+    float: right;
+}
+
+.middleWidth {
+    max-width: 888px;
+}
+form .delete {
+    background: url("/Images/error.png");
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+    border:0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+    form .delete:hover
+    {
+        height: 32px;
+        width: 32px;
+    }
+.educations form, .jobs form,h2 {
+    display: -webkit-inline-box;
+}
+@media only screen and (max-width: 850px){
+    #pic{
+        float:left;
+    }
+}
+
