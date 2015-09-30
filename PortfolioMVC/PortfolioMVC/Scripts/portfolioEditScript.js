@@ -14,10 +14,14 @@
 //}
 
 //uploadPreview();
+
+var reader = new FileReader();
+var pic = $('#pic')[0];
+var status = $('#test_data');
+var drop = $('#uploader');
+var img = $('#pic');
 function onFileSelected(event) {
     var selectedFile = event.target.files[0];
-    var reader = new FileReader();
-    var pic = $('#pic')[0];
     //var holder = $('#pic_hidden')[0];
     //var vid={name:'',media_type:'',source:''};
     reader.onload = function (event) {
@@ -26,9 +30,7 @@ function onFileSelected(event) {
     }
     reader.readAsDataURL(selectedFile);
 };
-var status = $('#test_data');
-var drop = $('#uploader');
-var img = $('#pic');
+
 
 if (window.FileReader) {
     addEventHandler(window, 'load', function () {
@@ -73,7 +75,9 @@ addEventHandler(drop, 'drop', function (e) {
 
     return false;
 });
-addEventHandler(reader, 'loadend', function (e, file) {
+var file;
+addEventHandler(reader, 'loadend', function (e, file_e) {
     var bin = this.result;
+    file = file_e
     img.src = bin;
 }.bindToEventHandler(file));
