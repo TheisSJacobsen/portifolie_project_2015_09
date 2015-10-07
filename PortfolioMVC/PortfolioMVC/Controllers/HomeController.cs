@@ -90,8 +90,10 @@ namespace PortfolioMVC.Controllers
         }
 
 
-        public ActionResult PortfolioEdit()
+        public ActionResult PortfolioEdit(string errorMessage=null)
         {
+            if (errorMessage != null)
+                ViewBag.error = errorMessage;
             var user = GetUserWithPortfolio();
             if (user != null)
                 return View(user);
@@ -128,6 +130,8 @@ namespace PortfolioMVC.Controllers
         [HttpPost]
         public ActionResult EducationAdd(string subject, string school, string address, DateTime from, DateTime to)
         {
+            if(from==null||to==null||address.Equals("")||school.Equals("")||subject.Equals(""))
+                return RedirectToAction("PortfolioEdit", new { errorMessage = "all fields must be filled out" });
             var user = GetUserWithPortfolio();
             var education = new tbleducation { eduName = subject, eduSchool = school, eduAddress = address, eduStart = from, eduFinish = to };
             user.tblportfolio.tbleducations.Add(education);
@@ -148,6 +152,8 @@ namespace PortfolioMVC.Controllers
         [HttpPost]
         public ActionResult JobAdd(string jobname, string companyname, string companyaddress, string refferanceName, string refferanceNumber, DateTime from, DateTime to)
         {
+            if(from==null||to==null||jobname.Equals("")||companyname.Equals("")||companyaddress.Equals("")||refferanceName.Equals("")||refferanceNumber.Equals(""))
+                return RedirectToAction("PortfolioEdit", new { errorMessage="all fields must be filled out" });
             var user = GetUserWithPortfolio();
             user.tblportfolio.tblworks.Add(new tblwork { workStart = from, workFinish = to, workTitle = jobname, workName = companyname, workAddress = companyaddress, workReferenceName = refferanceName, workReferenceNumber = refferanceNumber });
             db.SaveChanges();
@@ -167,6 +173,8 @@ namespace PortfolioMVC.Controllers
         [HttpPost]
         public ActionResult PortfolioDescription(string description)
         {
+            if(description.Equals(""))
+                return RedirectToAction("PortfolioEdit", new { errorMessage = "all fields must be filled out" });
             var user = GetUserWithPortfolio();
             user.tblportfolio.portDescription = description;
             db.SaveChanges();

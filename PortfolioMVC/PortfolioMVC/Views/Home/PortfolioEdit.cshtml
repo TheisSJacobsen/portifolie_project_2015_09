@@ -7,6 +7,7 @@
 
 <link href="@Url.Content("~/Content/portfolioEdit.css")" rel="stylesheet" type="text/css" />
 <div class="middleWidth">
+    <p class="error">@ViewBag.error</p>
     <h2>@(Model.userFullName)'s Portfolie Editing</h2>
 
     @using (Html.BeginForm("userpost", "home", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -14,7 +15,7 @@
         <img id="pic" onerror="this.src=@(ViewBag.DefaultImg)" src="@if (Model.userPicture != null){ @(Model.userPicture)  } else {  @(ViewBag.DefaultImg)  } " />
         <p id="test_data"></p>
         @*<input type="hidden" name="pic" id="pic_hidden"/>*@
-        <input type="text" name="fullname" value="@(Model.userFullName)" />
+    <input type="text" name="fullname" pattern="^(([a-zA-Z]|\p{L})+\s)*([a-zA-Z]|\p{L})+$" placeholder="Enter your fullname" required title="Kun tekst og mellemrum er tilladt." value="@(Model.userFullName)" />
         <input type="text" name="description" value="@(Model.userDescription)" />
         <input type="text" name="address" value="@(Model.userAddress)" />
         <input id="uploader" name="pic" type="file" placeholder="A picture of you" accept="image/*" onchange="onFileSelected(event);" />
@@ -42,11 +43,11 @@
     @using (Html.BeginForm("educationAdd", "home", FormMethod.Post))
     {
         <h3>Add an education</h3>
-        <input name="subject" type="text" placeholder="Name of subject of study" />
-        <input name="school" type="text" placeholder="School name" />
-        <input name="address" type="text" placeholder="School Address" />
-        <p>From:</p> <input name="from" type="date" />
-        <p>To:</p> <input name="to" type="date" />
+        <input name="subject" type="text" required placeholder="Name of subject of study" />
+        <input name="school" type="text" required placeholder="School name" />
+        <input name="address" type="text" required placeholder="School Address" />
+        <p>From:</p> <input name="from" required type="date" />
+        <p>To:</p> <input name="to" required type="date" />
         <input type="submit" value="Add" />
     }
     <h1>Jobs</h1>
@@ -71,13 +72,13 @@
     @using (Html.BeginForm("jobAdd", "home", FormMethod.Post))
     {
         <h3>Add a Job</h3>
-        <input type="text" name="jobname" placeholder="Name of field or title of job/work" />
-        <input type="text" name="companyname" placeholder="Workplace name" />
-        <input type="text" name="companyaddress" placeholder="Workplace address" />
-        <input type="text" name="refferanceName" placeholder="Work Refferance Name" />
-        <input type="text" name="refferanceNumber" placeholder="Work Refferance Number" />
-        <p>From:</p> <input name="from" type="date" />
-        <p>To:</p> <input name="to" type="date" />
+        <input type="text" name="jobname" required placeholder="Name of field or title of job/work" />
+        <input type="text" name="companyname" required placeholder="Workplace name" />
+        <input type="text" name="companyaddress" required placeholder="Workplace address" />
+        <input type="text" name="refferanceName" required placeholder="Work Refferance Name" />
+        <input type="text" name="refferanceNumber" required placeholder="Work Refferance Number" />
+        <p>From:</p> <input name="from" required type="date" />
+        <p>To:</p> <input name="to" required type="date" />
         <input type="submit" value="Add" />
     }
     <h1>Portfolio</h1>
