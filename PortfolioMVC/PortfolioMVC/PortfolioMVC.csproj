@@ -292,6 +292,7 @@
     </EntityDeploy>
     <Content Include="Images\DefUser.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logomain.png" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
